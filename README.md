@@ -18,7 +18,7 @@
   - Sound, vibration and flash can be set to infinitely loop
   - The WPM of sound can be adjusted between 15 - 20 WPM
   - The sound is generated through the device rather than being played from a file which makes changes/ modifications super easy.
-  - The vibration strength has been adjust so as to clearly differentiate between dit and dah
+  - The vibration strength has been adjusted so as to clearly differentiate between dit and dah
   - Flashes run at full brightness and is synchronised so as it is visible from a far distance
   - The UI is super simple
 
