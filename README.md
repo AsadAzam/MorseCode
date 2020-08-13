@@ -22,7 +22,5 @@ It uses the following frameworks:
 * AVFoundation - To generate audio signals and play them, and also for Flashlight
 * CoreHaptics - To compose and play vibration patters
 
-I plan to make this app an open-source app with MIT License so that it can be improved and used by the community.
-
 #### Installation
 Morse Code requires Xcode to build and run, to test features such as vibration and flash we need an iOS device running on iOS 13.6
