@@ -1,6 +1,6 @@
 # Morse Code
 
-https://img.shields.io/github/license/AsadAzam/MorseCode?style=for-the-badge
+![GitHub](https://img.shields.io/github/license/AsadAzam/MorseCode?style=for-the-badge)
 
 #### Morse Code is an iOS app which can convert text to
 - ##### Sound
