@@ -29,7 +29,7 @@ It uses the following frameworks:
 
 * UIKit - For all the graphical interface
 * AVFoundation - To generate audio signals and play them, and also for Flashlight
-* CoreHaptics - To compose and play vibration patters
+* CoreHaptics - To compose and play vibration patterns
 
 #### Installation
 Morse Code requires Xcode to build and run, to test features such as vibration and flash we need an iOS device running on iOS 13.6
