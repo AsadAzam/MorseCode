@@ -6,8 +6,19 @@
 ![GitHub](https://img.shields.io/github/issues-pr/AsadAzam/MorseCode?style=for-the-badge)
 ![GitHub](https://img.shields.io/github/last-commit/AsadAzam/MorseCode?style=for-the-badge)
 
+# Screenshots
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/32137859/90597714-464c1700-e20f-11ea-821a-9846b74e615a.png" alt="MainScreen" width="200"/>
+  <img src="https://user-images.githubusercontent.com/32137859/90598375-865fc980-e210-11ea-9240-32f9dd21ee2d.png" alt="SoundScreen" width="200"/>
+  <img src="https://user-images.githubusercontent.com/32137859/90598545-dd659e80-e210-11ea-90f3-e3b8aa378134.png" alt="VibrationScreen" width="200"/>
+  <img src="https://user-images.githubusercontent.com/32137859/90598610-fbcb9a00-e210-11ea-97fb-3576cf8da652.png" alt="FlashScreen" width="200"/>
+</p>
 
-
+# Usage
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/32137859/90598751-451be980-e211-11ea-8940-32a0a2bd59fa.png" alt="Use1" width="200"/>
+  <img src="https://user-images.githubusercontent.com/32137859/90598775-51a04200-e211-11ea-8124-ddefb059acc0.png" alt="Use2" width="200"/>  
+</p>
 
 #### Morse Code is an iOS app which can convert text to
 - ##### Sound
