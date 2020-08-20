@@ -17,7 +17,7 @@ struct ViewController: View {
                     ZStack {
                         Color(UIColor.white)
                         HStack {
-                            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                            NavigationLink(destination: MorseSound()) {
                                 Image(systemName: "speaker.3.fill")
                                 Text("Sound")
                                     .foregroundColor(Color.black)
@@ -66,5 +66,70 @@ struct ViewController: View {
 struct ViewController_Previews: PreviewProvider {
     static var previews: some View {
         ViewController()
+    }
+}
+
+class MorseCodeManager {
+    static func getMorseCode() -> [String: String] {
+        var mapMorseCode : [String: String] = [:]
+        //MARK: Morse Code Start
+        mapMorseCode["a"] = ".-"
+        mapMorseCode["b"] = "-..."
+        mapMorseCode["c"] = "-.-."
+        mapMorseCode["d"] = "-.."
+        mapMorseCode["e"] = "."
+        mapMorseCode["f"] = "..-."
+        mapMorseCode["g"] = "--."
+        mapMorseCode["h"] = "...."
+        mapMorseCode["i"] = ".."
+        mapMorseCode["j"] = ".---"
+        mapMorseCode["k"] = "-.-"
+        mapMorseCode["l"] = ".-.."
+        mapMorseCode["m"] = "--"
+        mapMorseCode["n"] = "-."
+        mapMorseCode["o"] = "---"
+        mapMorseCode["p"] = ".--."
+        mapMorseCode["q"] = "--.-"
+        mapMorseCode["r"] = ".-."
+        mapMorseCode["s"] = "..."
+        mapMorseCode["t"] = "-"
+        mapMorseCode["u"] = "..-"
+        mapMorseCode["v"] = "...-"
+        mapMorseCode["w"] = ".--"
+        mapMorseCode["x"] = "-..-"
+        mapMorseCode["y"] = "-.--"
+        mapMorseCode["z"] = "--.."
+        mapMorseCode["1"] = ".----"
+        mapMorseCode["2"] = "..---"
+        mapMorseCode["3"] = "...--"
+        mapMorseCode["4"] = "....-"
+        mapMorseCode["5"] = "....."
+        mapMorseCode["6"] = "-...."
+        mapMorseCode["7"] = "--..."
+        mapMorseCode["8"] = "---.."
+        mapMorseCode["9"] = "----."
+        mapMorseCode["0"] = "-----"
+        mapMorseCode["."] = ".-.-.-"
+        mapMorseCode[","] = "--..--"
+        mapMorseCode["?"] = "..--.."
+        mapMorseCode["\'"] = ".----."
+        mapMorseCode["!"] = "-.-.--"
+        mapMorseCode["/"] = "-..-."
+        mapMorseCode["("] = "-.--."
+        mapMorseCode[")"] = "-.--.-"
+        mapMorseCode["&"] = ".-..."
+        mapMorseCode[":"] = "---..."
+        mapMorseCode[";"] = "-.-.-."
+        mapMorseCode["="] = "-...-"
+        mapMorseCode["+"] = ".-.-."
+        mapMorseCode["-"] = "-...-"
+        mapMorseCode["_"] = "..--.-"
+        mapMorseCode["\""] = ".-..-."
+        mapMorseCode["$"] = "...-..-"
+        mapMorseCode["@"] = ".--.-."
+        mapMorseCode[" "] = "/"
+        mapMorseCode[" # "] = "#"
+        //MARK: Morse Code END
+        return mapMorseCode
     }
 }
