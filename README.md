@@ -1,6 +1,8 @@
 # Morse Code
 Morse Code is an iOS App which converts text to morse code in three formats. This feature exists on Apple Watch for telling the time. So I thought why not port the idea to a native iOS app!
 
+### This is the master branch, if you want the SwiftUI version then you should check out the SwiftUI branch too!
+
 ![GitHub](https://img.shields.io/github/license/AsadAzam/MorseCode?style=for-the-badge)
 ![GitHub](https://img.shields.io/github/issues-raw/AsadAzam/MorseCode?style=for-the-badge)
 ![GitHub](https://img.shields.io/github/issues-closed-raw/AsadAzam/MorseCode?style=for-the-badge)
