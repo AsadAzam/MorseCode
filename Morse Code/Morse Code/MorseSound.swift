@@ -121,7 +121,6 @@ struct MorseSound: View {
     }
     
     func convertedToMorse() {
-        
         let frequency: Float = 550
         let amplitude: Float = min(max(0.5, 0.0), 1.0)
         let twoPi = 2 * Float.pi
