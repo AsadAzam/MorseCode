@@ -34,6 +34,8 @@ struct ViewController: View {
                             NavigationLink(destination: MorseVibration()) {
                                 Image(systemName: "dot.radiowaves.left.and.right")
                                 Text("Vibration")
+                                    .frame(width: 70)
+                                    .lineLimit(1)
                                     .foregroundColor(Color.black)
                             }
                             
