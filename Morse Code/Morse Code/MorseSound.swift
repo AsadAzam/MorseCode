@@ -23,6 +23,8 @@ struct MorseSound: View {
     @State var showAlert: Bool = false
     //MARK: END
     
+    @ObservedObject private var keyboard = KeyboardResponder()
+    
     let engine = AVAudioEngine()
 
     var body: some View {
@@ -111,6 +113,8 @@ struct MorseSound: View {
                         .shadow(color: Color(UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)), radius: 5)
                 }
                 .padding(.horizontal, 20)
+                .offset(y: keyboard.currentKeyboardHeight)
+                .animation(.easeInOut)
             }
         }
         .navigationBarTitle("Sound")
@@ -120,7 +124,6 @@ struct MorseSound: View {
         
         let frequency: Float = 550
         let amplitude: Float = min(max(0.5, 0.0), 1.0)
-        //var duration: Float = 0.06
         let twoPi = 2 * Float.pi
         let sine = { (phase: Float) -> Float in
             return sin(phase)
@@ -198,15 +201,6 @@ struct MorseSound: View {
         }
     }
     
-    //Hides keyboard when enter/done is pressed
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if(text == "\n") {
-            //convertFrom.resignFirstResponder()
-            return false
-        }
-        return true
-    }
-    
     //Initializes engine to play sound
     func playSound(duration: Float) {
         do {
@@ -242,20 +236,6 @@ struct MorseSound: View {
         self.isUserInteractionEnabled = true
         currentTitle = "Convert"
     }
-
-//    func handleKeyboardNotification(notification: NSNotification) {
-//        if let userInfo = notification.userInfo {
-//            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-//            if notification.name == UIResponder.keyboardWillShowNotification {
-//                convertFrom.frame.origin.y -= keyboardFrame.height
-//                convertFrom.frame.origin.y += 10
-//            }
-//            else if notification.name == UIResponder.keyboardWillHideNotification {
-//                convertFrom.frame.origin.y += keyboardFrame.height
-//                convertFrom.frame.origin.y -= 10
-//            }
-//        }
-//    }
 //MARK: MorseSound Class END
 }
 

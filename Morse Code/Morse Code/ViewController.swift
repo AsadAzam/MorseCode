@@ -135,3 +135,30 @@ class MorseCodeManager {
         return mapMorseCode
     }
 }
+
+final class KeyboardResponder: ObservableObject {
+    @Published private(set) var currentKeyboardHeight: CGFloat = 0.0
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //MARK: objC Function(s)
+    @objc func handleKeyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+            if notification.name == UIResponder.keyboardWillShowNotification {
+                currentKeyboardHeight = -CGFloat(keyboardFrame.height) - 20.0
+            }
+            else if notification.name == UIResponder.keyboardWillHideNotification {
+                currentKeyboardHeight = 0.0
+            }
+        }
+    }
+    
+    //MARK: Deinitializer
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+}

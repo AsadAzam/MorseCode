@@ -24,6 +24,8 @@ struct MorseVibration: View {
     @State var showAlert: Bool = false
     //MARK: END
     
+    @ObservedObject private var keyboard = KeyboardResponder()
+    
     var body: some View {
         ZStack{
             Color(UIColor.tertiarySystemGroupedBackground).edgesIgnoringSafeArea(.all)
@@ -99,6 +101,8 @@ struct MorseVibration: View {
                         .shadow(color: Color(UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)), radius: 5)
                 }
                 .padding(.horizontal, 20)
+                .offset(y: keyboard.currentKeyboardHeight)
+                .animation(.easeInOut)
             }
         }
         .navigationBarTitle("Vibration")
@@ -109,7 +113,6 @@ struct MorseVibration: View {
         self.forceStop = false
         if currentTitle == "Convert" {
             if (convertFrom != ""){
-//                convertFrom.resignFirstResponder()
                 morseCodeText = convertFrom
                 initializeString(toConvert: &morseCodeText)
                 tempConvert()
@@ -139,15 +142,6 @@ struct MorseVibration: View {
             let tempString = mapMorseCode[morseCodeText[index]] ?? "#"
             convertedTo = convertedTo + " " + tempString
         }
-    }
-    
-    //Hides keyboard when enter/done is pressed
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if(text == "\n") {
-//            convertFrom.resignFirstResponder()
-            return false
-        }
-        return true
     }
     
 //MARK: Main Convert Function and Logic
@@ -209,28 +203,6 @@ struct MorseVibration: View {
             }
         }
     }
-    
-//MARK: objC Function(s)
-//    @objc func handleKeyboardNotification(notification: NSNotification) {
-//        if let userInfo = notification.userInfo {
-//            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-//            if notification.name == UIResponder.keyboardWillShowNotification {
-//                convertFrom.frame.origin.y -= keyboardFrame.height
-//                convertFrom.frame.origin.y += 10
-//            }
-//            else if notification.name == UIResponder.keyboardWillHideNotification {
-//                convertFrom.frame.origin.y += keyboardFrame.height
-//                convertFrom.frame.origin.y -= 10
-//            }
-//        }
-//    }
-    
-//MARK: Deinitializer
-//    deinit {
-//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-//    }
-    
 //MARK: MorseVibration Struct END
 }
 
