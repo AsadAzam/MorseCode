@@ -3,5 +3,5 @@ Morse Code is an iOS App which converts text to morse code in three formats. Thi
 ### Currently the SwiftUI branch is not yet complete!
 ### Current Issues
     - Repeat and Stop buttons remains disabled after a sound has started playing
-    - Vibration Not Implemented
-    - Flashlight Not Implemented
+    - Alert isn't confiured
+    - Keyboard doesn't change the layout as it should. (you might have to type without seeing the text!)
