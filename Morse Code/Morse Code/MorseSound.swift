@@ -9,26 +9,21 @@
 import SwiftUI
 import AVFoundation
 
-var morseCodeText: String!
-var mapMorseCode: [String: String] = MorseCodeManager.getMorseCode()
-
-
 struct MorseSound: View {
     
     @State var convertFrom: String = ""
     @State var convertedTo: String = "Converted Text"
     @State var currentTitle: String = "Convert"
-    @State var wpmPicker: Int = 3
+    @State var wpmPicker: Int = 20
+    @State var duration: Float = 0.06
     
     //MARK: Adiitional States for SwiftUI
     @State var isUserInteractionEnabled: Bool = true
     @State var repeatSound: Bool = false
     //MARK: END
     
-    var wpm: Double = 20.0
-    
-   
-    
+    let engine = AVAudioEngine()
+
     var body: some View {
         ZStack{
             Color(UIColor.tertiarySystemGroupedBackground).edgesIgnoringSafeArea(.all)
@@ -50,20 +45,19 @@ struct MorseSound: View {
                 Spacer()
                 HStack{
                     Picker(selection: $wpmPicker, label: Text("WPM")) {
-                        Text("20 WPM").tag(1)
-                        Text("19 WPM").tag(2)
-                        Text("18 WPM").tag(3)
-                        Text("17 WPM").tag(4)
-                        Text("16 WPM").tag(5)
-                        Text("15 WPM").tag(6)
+                        Text("20 WPM").tag(20)
+                        Text("19 WPM").tag(19)
+                        Text("18 WPM").tag(18)
+                        Text("17 WPM").tag(17)
+                        Text("16 WPM").tag(16)
+                        Text("15 WPM").tag(15)
                     }
                     .frame(width: 104, height: 60)
                     .clipped()
                     .scaledToFit()
                     .disabled(!self.isUserInteractionEnabled)
-                    
                     Button(action: {
-                        print("called")
+                        self.duration = Float(60 / (50 * Float(self.wpmPicker)))
                         self.convertedToMorse()
                     }) {
                         Text("\(currentTitle)")
@@ -74,7 +68,9 @@ struct MorseSound: View {
                     Spacer()
                     
                     if self.repeatSound == false {
-                        Button(action: {}) {
+                        Button(action: {
+                            self.repeatSound.toggle()
+                        }) {
                             Image(systemName: "repeat")
                         }
                         .frame(width: 39, height: 34)
@@ -82,7 +78,9 @@ struct MorseSound: View {
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                         .foregroundColor(Color(UIColor.systemGray6))
                     } else {
-                        Button(action: {}) {
+                        Button(action: {
+                            self.repeatSound.toggle()
+                        }) {
                             Image(systemName: "repeat")
                         }
                         .frame(width: 39, height: 34)
@@ -110,12 +108,51 @@ struct MorseSound: View {
                 }
                 .padding(.horizontal, 20)
             }
-//            .padding(.horizontal, 20)
         }
         .navigationBarTitle("Sound")
     }
     
     func convertedToMorse() {
+        
+        let frequency: Float = 550
+        let amplitude: Float = min(max(0.5, 0.0), 1.0)
+        //var duration: Float = 0.06
+        let twoPi = 2 * Float.pi
+        let sine = { (phase: Float) -> Float in
+            return sin(phase)
+        }
+        let signal: (Float) -> Float = sine
+        
+        let mainMixer = engine.mainMixerNode
+        let output = engine.outputNode
+        let outputFormat = output.inputFormat(forBus: 0)
+        let sampleRate = Float(outputFormat.sampleRate)
+        let inputFormat = AVAudioFormat(commonFormat: outputFormat.commonFormat,
+                                        sampleRate: outputFormat.sampleRate,
+                                        channels: 1,
+                                        interleaved: outputFormat.isInterleaved)
+        var currentPhase: Float = 0
+        let phaseIncrement = (twoPi / sampleRate) * frequency
+
+        let srcNode = AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
+            let ablPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
+            for frame in 0..<Int(frameCount) {
+                let value = signal(currentPhase) * amplitude
+                currentPhase += phaseIncrement
+                if currentPhase >= twoPi {
+                    currentPhase -= twoPi
+                }
+                if currentPhase < 0.0 {
+                    currentPhase += twoPi
+                }
+                for buffer in ablPointer {
+                    let buf: UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(buffer)
+                    buf[frame] = value
+                }
+            }
+            return noErr
+        }
+        
         if (currentTitle == "Convert") {
             engine.attach(srcNode)
             engine.connect(srcNode, to: mainMixer, format: inputFormat)
@@ -180,7 +217,7 @@ struct MorseSound: View {
             CFRunLoopRunInMode(.defaultMode, CFTimeInterval(duration), false)
             engine.stop()
         } catch {
-                print("Could not start engine: \(error)")
+            print("Could not start engine: \(error)")
         }
     }
     
@@ -205,7 +242,7 @@ struct MorseSound: View {
             }
             do { usleep(useconds_t(msTime*2)) }
         }
-        isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         currentTitle = "Convert"
     }
 
@@ -232,44 +269,8 @@ struct MorseSound_Previews: PreviewProvider {
 }
 
 //MARK: Global Variables
-let frequency: Float = 550
-let amplitude: Float = min(max(0.5, 0.0), 1.0)
-var duration: Float = 0.06
-let twoPi = 2 * Float.pi
-let sine = { (phase: Float) -> Float in
-    return sin(phase)
-}
-var signal: (Float) -> Float = sine
-let engine = AVAudioEngine()
-let mainMixer = engine.mainMixerNode
-let output = engine.outputNode
-let outputFormat = output.inputFormat(forBus: 0)
-let sampleRate = Float(outputFormat.sampleRate)
-let inputFormat = AVAudioFormat(commonFormat: outputFormat.commonFormat,
-                                sampleRate: outputFormat.sampleRate,
-                                channels: 1,
-                                interleaved: outputFormat.isInterleaved)
-var currentPhase: Float = 0
-let phaseIncrement = (twoPi / sampleRate) * frequency
-
-let srcNode = AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
-    let ablPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
-    for frame in 0..<Int(frameCount) {
-        let value = signal(currentPhase) * amplitude
-        currentPhase += phaseIncrement
-        if currentPhase >= twoPi {
-            currentPhase -= twoPi
-        }
-        if currentPhase < 0.0 {
-            currentPhase += twoPi
-        }
-        for buffer in ablPointer {
-            let buf: UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(buffer)
-            buf[frame] = value
-        }
-    }
-    return noErr
-}
+var morseCodeText: String!
+var mapMorseCode: [String: String] = MorseCodeManager.getMorseCode()
 
 //MARK: Extension(s)
 extension String {

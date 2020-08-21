@@ -14,6 +14,8 @@
 		C387A5F324EE3B02003581EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C387A5F224EE3B02003581EC /* Preview Assets.xcassets */; };
 		C387A5F624EE3B02003581EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C387A5F424EE3B02003581EC /* LaunchScreen.storyboard */; };
 		C387A5FE24EE4673003581EC /* MorseSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387A5FD24EE4673003581EC /* MorseSound.swift */; };
+		C387A60224F01E88003581EC /* MorseVibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387A60124F01E88003581EC /* MorseVibration.swift */; };
+		C387A60424F02640003581EC /* MorseFlash.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387A60324F02640003581EC /* MorseFlash.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		C387A5F524EE3B02003581EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C387A5F724EE3B02003581EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C387A5FD24EE4673003581EC /* MorseSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseSound.swift; sourceTree = "<group>"; };
+		C387A60124F01E88003581EC /* MorseVibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseVibration.swift; sourceTree = "<group>"; };
+		C387A60324F02640003581EC /* MorseFlash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseFlash.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				C387A5E924EE3B01003581EC /* AppDelegate.swift */,
 				C387A5EB24EE3B01003581EC /* SceneDelegate.swift */,
 				C387A5FD24EE4673003581EC /* MorseSound.swift */,
+				C387A60124F01E88003581EC /* MorseVibration.swift */,
+				C387A60324F02640003581EC /* MorseFlash.swift */,
 				C387A5ED24EE3B01003581EC /* ViewController.swift */,
 				C387A5EF24EE3B02003581EC /* Assets.xcassets */,
 				C387A5F424EE3B02003581EC /* LaunchScreen.storyboard */,
@@ -151,8 +157,10 @@
 			files = (
 				C387A5EA24EE3B01003581EC /* AppDelegate.swift in Sources */,
 				C387A5EC24EE3B01003581EC /* SceneDelegate.swift in Sources */,
+				C387A60224F01E88003581EC /* MorseVibration.swift in Sources */,
 				C387A5FE24EE4673003581EC /* MorseSound.swift in Sources */,
 				C387A5EE24EE3B01003581EC /* ViewController.swift in Sources */,
+				C387A60424F02640003581EC /* MorseFlash.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

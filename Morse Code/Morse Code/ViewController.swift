@@ -31,7 +31,7 @@ struct ViewController: View {
                     ZStack {
                         Color(UIColor.white)
                         HStack {
-                            Button(action: {}) {
+                            NavigationLink(destination: MorseVibration()) {
                                 Image(systemName: "dot.radiowaves.left.and.right")
                                 Text("Vibration")
                                     .foregroundColor(Color.black)
@@ -46,7 +46,7 @@ struct ViewController: View {
                     ZStack {
                         Color(UIColor.white)
                         HStack {
-                            Button(action: {}) {
+                            NavigationLink(destination: MorseFlash()) {
                                 Image(systemName: "flashlight.on.fill")
                                 Text("Flash")
                                     .foregroundColor(Color.black)
