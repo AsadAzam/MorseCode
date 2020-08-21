@@ -21,6 +21,7 @@ struct MorseVibration: View {
     @State var repeatVibration: Bool = false
     @State var engine: CHHapticEngine!
     @State var forceStop: Bool = false
+    @State var showAlert: Bool = false
     //MARK: END
     
     var body: some View {
@@ -53,6 +54,9 @@ struct MorseVibration: View {
                     .frame(width: 120, height: 60)
                     .background(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text("No Input!"), message: Text("Input field cannot be empty"), dismissButton: .default(Text("OK")))
+                    }
                     Spacer()
                     
                     if self.repeatVibration == false {
@@ -115,7 +119,7 @@ struct MorseVibration: View {
                     self.convert(morseCodeText: morseCodeText, mapMorseCode: mapMorseCode)
                 }
             } else {
-                showAlertWith(title: "No Input!", message: "Input field cannot be empty")
+                showAlert = true
             }
         } else {
             if repeatVibration == true {
@@ -144,13 +148,6 @@ struct MorseVibration: View {
             return false
         }
         return true
-    }
-    
-    //Alerter
-    func showAlertWith(title: String, message: String){
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-//        present(ac, animated: true)
     }
     
 //MARK: Main Convert Function and Logic

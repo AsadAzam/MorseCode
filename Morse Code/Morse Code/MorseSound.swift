@@ -20,6 +20,7 @@ struct MorseSound: View {
     //MARK: Adiitional States for SwiftUI
     @State var isUserInteractionEnabled: Bool = true
     @State var repeatSound: Bool = false
+    @State var showAlert: Bool = false
     //MARK: END
     
     let engine = AVAudioEngine()
@@ -65,6 +66,9 @@ struct MorseSound: View {
                     .frame(width: 120, height: 60)
                     .background(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text("No Input!"), message: Text("Input field cannot be empty"), dismissButton: .default(Text("OK")))
+                    }
                     Spacer()
                     
                     if self.repeatSound == false {
@@ -172,7 +176,7 @@ struct MorseSound: View {
                     }
                 }
             } else {
-                showAlertWith(title: "No Input!", message: "Input field cannot be empty")
+                showAlert = true
             }
         } else {
             if repeatSound == true {
@@ -201,13 +205,6 @@ struct MorseSound: View {
             return false
         }
         return true
-    }
-    
-    //Alerter
-    func showAlertWith(title: String, message: String){
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-//        present(ac, animated: true)
     }
     
     //Initializes engine to play sound

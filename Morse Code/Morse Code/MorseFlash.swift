@@ -20,7 +20,7 @@ struct MorseFlash: View {
     @State var isUserInteractionEnabled: Bool = true
     @State var repeatFlash: Bool = false
     @State var forceFlashStop: Bool = false
-
+    @State var showAlert: Bool = false
     //MARK: END
     
     var body: some View {
@@ -53,6 +53,9 @@ struct MorseFlash: View {
                     .frame(width: 120, height: 60)
                     .background(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text("No Input!"), message: Text("Input field cannot be empty"), dismissButton: .default(Text("OK")))
+                    }
                     Spacer()
                     
                     if self.repeatFlash == false {
@@ -114,7 +117,7 @@ struct MorseFlash: View {
                     convert(morseCodeText: morseCodeText, mapMorseCode: mapMorseCode)
                 }
             } else {
-                showAlertWith(title: "No Input!", message: "Input field cannot be empty")
+                showAlert = true
             }
         } else {
             if repeatFlash == true {
@@ -149,13 +152,6 @@ struct MorseFlash: View {
             return false
         }
         return true
-    }
-    
-    //Alerter
-    func showAlertWith(title: String, message: String){
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-//        present(ac, animated: true)
     }
     
     //Toggles the flash on or off
